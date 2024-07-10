@@ -19,6 +19,7 @@ This template comes with the following features:
 
 - `dev` – start dev server
 - `build` – bundle application for production
+- `generate` – generates graphql types with [graphql-codegen](https://www.graphql-code-generator.com/)
 - `export` – exports static website to `out` folder
 - `analyze` – analyzes application bundle with [@next/bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)
 

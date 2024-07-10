@@ -1,9 +1,10 @@
 overwrite: true
-schema: "https://rickandmortyapi.com/graphql"
-documents: "src/**/*.tsx"
+schema: 'https://rickandmortyapi.com/graphql' # or path to your local schema file
+documents: './graphql/queries/**/*.graphql' # adjust the path to your GraphQL queries/mutations
 generates:
-  src/generated/graphql.tsx:
+  types/graphql.ts:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+      - 'typed-document-node'

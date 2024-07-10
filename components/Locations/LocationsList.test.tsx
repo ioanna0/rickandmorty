@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitForElementToBeRemoved } from '@testing-l
 import { MockedProvider } from '@apollo/client/testing';
 import { MantineProvider } from '@mantine/core';
 import { useRouter } from 'next/router';
-import { GET_LOCATIONS } from '@/utils/graphql-queries';
+import GET_LOCATIONS from 'graphql/queries/getLocations.graphql';
 import Locations from './LocationsList';
 
 jest.mock('next/router', () => ({
@@ -91,7 +91,7 @@ describe('Locations component', () => {
       </MockedProvider>
     );
 
-    await waitForElementToBeRemoved(() => screen.getByTestId('loader'));
+    await waitForElementToBeRemoved(() => screen.queryByTestId('loader'));
 
     expect(screen.getByText('Earth (C-137)')).toBeInTheDocument();
     expect(screen.getByText('Citadel of Ricks')).toBeInTheDocument();
@@ -109,7 +109,7 @@ describe('Locations component', () => {
       </MockedProvider>
     );
 
-    await waitForElementToBeRemoved(() => screen.getByTestId('loader'));
+    await waitForElementToBeRemoved(() => screen.queryByTestId('loader'));
 
     fireEvent.click(screen.getAllByText('View')[0]);
 
@@ -135,7 +135,7 @@ describe('Locations component', () => {
       </MockedProvider>
     );
 
-    await waitForElementToBeRemoved(() => screen.getByTestId('loader'));
+    await waitForElementToBeRemoved(() => screen.queryByTestId('loader'));
 
     expect(screen.getByText('Error: An error occurred')).toBeInTheDocument();
   });

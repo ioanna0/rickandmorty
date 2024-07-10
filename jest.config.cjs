@@ -10,6 +10,9 @@ const customJestConfig = {
     '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
   },
+  transform: {
+    '\\.graphql$': '<rootDir>/jest-transform-graphql.js',
+  },
   testEnvironment: 'jest-environment-jsdom',
 };
 

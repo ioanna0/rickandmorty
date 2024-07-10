@@ -2,32 +2,37 @@ import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { Table, Button, Container, Title, Pagination, Group, TableData } from '@mantine/core';
 import { useRouter } from 'next/router';
-import { GET_EPISODES } from '@/utils/graphql-queries';
+import GET_EPISODES from 'graphql/queries/getEpisodes.graphql';
 import CustomLoader from '../CustomLoader';
+import { GetEpisodesQuery, GetEpisodesQueryVariables } from '@/types/graphql';
 
-const Episodes = () => {
-  const [page, setPage] = useState(1);
-  const { loading, error, data } = useQuery(GET_EPISODES, { variables: { page } });
+const Episodes: React.FC = () => {
+  const [page, setPage] = useState<number>(1);
+  const { loading, error, data } = useQuery<GetEpisodesQuery, GetEpisodesQueryVariables>(
+    GET_EPISODES,
+    { variables: { page } }
+  );
   const router = useRouter();
 
   if (loading) return <CustomLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
-  const handleViewClick = (id: string) => {
+  const handleViewClick = (id: string | undefined | null) => {
+    if (!id) return;
     router.push(`/episodes/${id}`);
   };
 
   const tableData: TableData = {
     caption: 'Episodes from Rick and Morty TV show',
     head: ['Name', 'Air Date', 'Episode', 'Actions'],
-    body: data.episodes.results.map((episode: any) => [
-      episode.name,
-      episode.air_date,
-      episode.episode,
-      <Button variant="outline" onClick={() => handleViewClick(episode.id)}>
+    body: data?.episodes?.results?.map((episode) => [
+      episode?.name,
+      episode?.air_date,
+      episode?.episode,
+      <Button variant="outline" onClick={() => handleViewClick(episode?.id)} key={episode?.id}>
         View
       </Button>,
-    ]),
+    ]) as [string, string, string, JSX.Element][],
   };
 
   return (
@@ -40,7 +45,7 @@ const Episodes = () => {
         <Pagination
           value={page}
           onChange={setPage}
-          total={data.episodes.info.pages}
+          total={data?.episodes?.info?.pages || 1}
           size="sm"
           withEdges
         />

@@ -1,76 +1,44 @@
 import React from 'react';
+import { Card, Container, Text, Title } from '@mantine/core';
 import { useQuery } from '@apollo/client';
-import { GET_LOCATION_BY_ID } from '@/utils/graphql-queries';
-import Link from 'next/link';
+import GET_LOCATION_BY_ID from 'graphql/queries/getLocationById.graphql';
 import { useRouter } from 'next/router';
 import CustomLoader from '@/components/CustomLoader';
+import { GetLocationByIdQuery, GetLocationByIdQueryVariables } from '@/types/graphql';
+import CharactersCard, { CardResident } from '@/components/Characters/CharactersCard';
 
 const LocationDetails = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { loading, error, data } = useQuery(GET_LOCATION_BY_ID, {
-    variables: { id: id },
-  });
+
+  const { loading, error, data } = useQuery<GetLocationByIdQuery, GetLocationByIdQueryVariables>(
+    GET_LOCATION_BY_ID,
+    {
+      variables: { id: id as string },
+    }
+  );
 
   if (loading) return <CustomLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
+  if (!data || !data.location) return <p>No data available</p>;
+
   const { location } = data;
 
   return (
-    <div>
-      <h1>{location.name}</h1>
-      <p>Name: {location.name}</p>
-      <p>Type: {location.type}</p>
-      <h2>Residents</h2>
-      <ul>
-        {location.residents.map(
-          (residents: {
-            id: React.Key | null | undefined;
-            name:
-              | string
-              | number
-              | bigint
-              | boolean
-              | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-              | Iterable<React.ReactNode>
-              | React.ReactPortal
-              | Promise<React.AwaitedReactNode>
-              | null
-              | undefined;
-            species:
-              | string
-              | number
-              | bigint
-              | boolean
-              | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-              | Iterable<React.ReactNode>
-              | React.ReactPortal
-              | Promise<React.AwaitedReactNode>
-              | null
-              | undefined;
-            status:
-              | string
-              | number
-              | bigint
-              | boolean
-              | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-              | Iterable<React.ReactNode>
-              | React.ReactPortal
-              | Promise<React.AwaitedReactNode>
-              | null
-              | undefined;
-          }) => (
-            <li key={residents.id}>
-              <Link href={`/characters/${residents.id}`}>
-                {residents.name} - {residents.species} ({residents.status})
-              </Link>
-            </li>
-          )
+    <Container>
+      <Card shadow="sm" padding="lg" mb="20px">
+        <Title order={1}>{location.name}</Title>
+        <Text size="lg">Type: {location.type}</Text>
+        <Text size="lg">Dimension: {location.dimension}</Text>
+        {location.created && (
+          <Text size="sm" c="dimmed">
+            Created: {new Date(location.created).toLocaleDateString()}
+          </Text>
         )}
-      </ul>
-      <p>Created: {location.created}</p>
-    </div>
+      </Card>
+      <CharactersCard residents={location.residents as CardResident[]} title="Residences" />
+    </Container>
   );
 };
 

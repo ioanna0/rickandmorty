@@ -9,4 +9,12 @@ export default withBundleAnalyzer({
   eslint: {
     ignoreDuringBuilds: true,
   },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.graphql$/,
+      exclude: /node_modules/,
+      use: [{ loader: 'graphql-tag/loader' }],
+    });
+    return config;
+  },
 });
