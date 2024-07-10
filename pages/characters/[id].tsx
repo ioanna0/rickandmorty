@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { Card, Image, Text, Loader, Container, Title, Group, List } from '@mantine/core';
+import { Card, Image, Text, Container, Title, Group, List } from '@mantine/core';
 import { GET_CHARACTER_BY_ID } from '@/utils/graphql-queries';
 import Link from 'next/link';
+import CustomLoader from '@/components/CustomLoader';
 
 const CharacterDetail = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const CharacterDetail = () => {
     variables: { id: id },
   });
 
-  if (loading) return <Loader />;
+  if (loading) return <CustomLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
   const { character } = data;

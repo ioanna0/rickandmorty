@@ -1,10 +1,10 @@
 import LocationsList from '@/components/Locations/LocationsList';
+import { Container } from '@mantine/core';
 
 export default function Locations() {
   return (
-    <div>
-      <h1>Rick and Morty Locations</h1>
+    <Container mt={40}>
       <LocationsList />
-    </div>
+    </Container>
   );
 }

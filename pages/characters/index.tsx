@@ -1,10 +1,10 @@
 import CharacterList from '@/components/Characters/CharacterList';
+import { Container } from '@mantine/core';
 
 export default function Characters() {
   return (
-    <div>
-      <h1>Rick and Morty Characters</h1>
+    <Container mt={40}>
       <CharacterList />
-    </div>
+    </Container>
   );
 }

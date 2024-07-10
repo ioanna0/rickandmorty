@@ -1,11 +1,11 @@
-import { Welcome } from '../components/Welcome/Welcome';
-import { PagesButtons } from '../components/PagesButtons/PagesButtons';
+import { Hero } from '../components/Hero/Hero';
+import { ExplorerLinks } from '../components/ExplorerLinks/ExplorerLinks';
 
 export default function HomePage() {
   return (
     <>
-      <Welcome />
-      <PagesButtons />
+      <Hero />
+      <ExplorerLinks />
     </>
   );
 }

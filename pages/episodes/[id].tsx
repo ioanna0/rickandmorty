@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_EPISODE_BY_ID } from '@/utils/graphql-queries';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import CustomLoader from '@/components/CustomLoader';
 
 const EpisodeDetails = () => {
   const router = useRouter();
@@ -11,9 +12,10 @@ const EpisodeDetails = () => {
     variables: { id: id },
   });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <CustomLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
+  console.log('>>> data', data);
   const { episode } = data;
 
   return (

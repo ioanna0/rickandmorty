@@ -1,10 +1,8 @@
-import { Button, Container, Group, List, ThemeIcon } from '@mantine/core';
+import { Container, Group, List, ThemeIcon } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
-export function PagesButtons() {
-  const router = useRouter();
+export function ExplorerLinks() {
   return (
     <Group justify="center" mt="xl">
       <Container>

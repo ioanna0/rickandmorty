@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_LOCATION_BY_ID } from '@/utils/graphql-queries';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import CustomLoader from '@/components/CustomLoader';
 
 const LocationDetails = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const LocationDetails = () => {
     variables: { id: id },
   });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <CustomLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
   const { location } = data;

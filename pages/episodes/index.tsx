@@ -1,10 +1,10 @@
 import EpisodesList from '@/components/Episodes/EpisodesList';
+import { Container } from '@mantine/core';
 
 export default function Episodes() {
   return (
-    <div>
-      <h1>Rick and Morty Episodes</h1>
+    <Container mt={40}>
       <EpisodesList />
-    </div>
+    </Container>
   );
 }
