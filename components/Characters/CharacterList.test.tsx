@@ -155,6 +155,7 @@ describe('Characters component', () => {
 
     await waitForElementToBeRemoved(() => screen.queryByTestId('loader'));
 
-    expect(screen.getByText('Error: An error occurred')).toBeInTheDocument();
+    expect(screen.getByTestId('error')).toBeInTheDocument();
+    expect(screen.getByText('An error occurred')).toBeInTheDocument();
   });
 });

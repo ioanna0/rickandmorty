@@ -5,13 +5,13 @@ const createJestConfig = nextJest({
 });
 
 const customJestConfig = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
+  setupFilesAfterEnv: ['<rootDir>/config/jest.setup.cjs'],
   moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
   },
   transform: {
-    '\\.graphql$': '<rootDir>/jest-transform-graphql.js',
+    '\\.graphql$': '<rootDir>/config/jest-transform-graphql.js',
   },
   testEnvironment: 'jest-environment-jsdom',
 };

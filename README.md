@@ -1,17 +1,12 @@
-# Mantine Next.js template
+# Rick and Morty API Explorer
 
-This is a template for [Next.js](https://nextjs.org/) pages router + [Mantine](https://mantine.dev/).
-If you want to use app router instead, see [next-app-template](https://github.com/mantinedev/next-app-template).
+This is a simple web application that allows users to explore the [Rick and Morty API](https://rickandmortyapi.com/graphql). It was built using the Mantine Next.js template.
 
-## Features
-
-This template comes with the following features:
-
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Jest](https://jestjs.io/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+## Technologies
+- Next.js with Pages Router
+- GraphQL with Apollo Client
+- codegen for generating GraphQL types from queries
+- Mantine UI components
 
 ## npm scripts
 
@@ -20,8 +15,6 @@ This template comes with the following features:
 - `dev` – start dev server
 - `build` – bundle application for production
 - `generate` – generates graphql types with [graphql-codegen](https://www.graphql-code-generator.com/)
-- `export` – exports static website to `out` folder
-- `analyze` – analyzes application bundle with [@next/bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)
 
 ### Testing scripts
 
@@ -30,10 +23,24 @@ This template comes with the following features:
 - `prettier:check` – checks files with Prettier
 - `jest` – runs jest tests
 - `jest:watch` – starts jest watch
-- `test` – runs `jest`, `prettier:check`, `lint` and `typecheck` scripts
+- `test` – runs `jest`, `lint` and `typecheck` scripts
 
-### Other scripts
 
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
+## Features
+
+- [x] List of characters - Route: `/characters` - GraphQL query: `getCharacters.graphql`
+- [x] List of episodes - Route: `/episodes` -  GraphQL query: `getEpisodes.graphql`
+- [x] List of locations - Route: `/locations` -  GraphQL query: `getLocations.graphql`
+- [x] Character details - Route: `/characters/[id]` -  GraphQL query: `getCharacterById.graphql`
+- [x] Episode details - Route: `/episodes/[id]` -  GraphQL query: `getEpisodeById.graphql`
+- [x] Location details - Route: `/locations/[id]` -  GraphQL query: `getLocationById.graphql`
+
+All generated types are available in `types/graphql.ts` file.
+
+### CRUD operations
+
+If we wanted to enhance this application, to have CRUD operations we can do so by adding new routes and GraphQL queries. 
+For example we can add a new route `/characters/new` that will allow users to create a new character. We can add a new GraphQL mutation `createCharacter.graphql` that will allow users to create a new character. The UI component would live in the `components/characters` folder and the form would be created using Mantine UI components.
+
+We could also leverage Next.js server APIs to handle the GraphQL mutations especially the mutations. We can create a new file in the `pages/api` folder called `characters.ts` that will handle the GraphQL mutations for characters.
+

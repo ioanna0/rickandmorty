@@ -4,7 +4,8 @@ import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import { ApolloProvider } from '@apollo/client';
 import client from '../utils/apollo-client';
-import { theme } from '../theme';
+import { theme } from '../utils/theme';
+import Navbar from '@/components/Navbar';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
             content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
           />
         </Head>
+        <Navbar />
         <Component {...pageProps} />
       </MantineProvider>
     </ApolloProvider>
